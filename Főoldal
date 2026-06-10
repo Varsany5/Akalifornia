@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akalifornia Cafè & Pizzeria – Balatonakali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #18BFBF;
+      --teal-dk: #0D9999;
+      --coral:   #E8603A;
+      --sand:    #FFF7ED;
+      --navy:    #0D3B5E;
+      --cream:   #FEF3E2;
+      --green:   #5A8C5A;
+      --gold:    #F5C842;
+      --white:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--sand);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(13, 59, 94, 0.92);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-family: 'Pacifico', cursive;
+      color: var(--teal);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+    .nav-logo span { color: var(--coral); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--coral);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: transform 0.2s, background 0.2s !important;
+    }
+    .nav-cta:hover { background: #d4522e !important; transform: scale(1.04); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0D3B5E 0%, #0a5e6e 60%, #18BFBF 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 24px 80px;
+    }
+
+    /* Animated wave background */
+    .waves-bg {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 200px;
+      overflow: hidden;
+    }
+    .wave {
+      position: absolute; bottom: 0; left: -50%; right: -50%;
+      height: 120px;
+      border-radius: 50%;
+      opacity: 0.25;
+    }
+    .wave1 {
+      background: var(--teal);
+      animation: waveMove 6s ease-in-out infinite;
+      height: 100px; bottom: -10px;
+    }
+    .wave2 {
+      background: #1BBFBF;
+      animation: waveMove 8s ease-in-out infinite reverse;
+      height: 120px; bottom: -20px;
+    }
+    .wave3 {
+      background: #3dd6d6;
+      animation: waveMove 10s ease-in-out infinite;
+      height: 80px; bottom: 0;
+    }
+    @keyframes waveMove {
+      0%, 100% { transform: translateX(0) scaleY(1); }
+      50%       { transform: translateX(5%) scaleY(1.05); }
+    }
+
+    /* Floating sun */
+    .sun {
+      position: absolute; top: 90px; right: 12%;
+      width: 110px; height: 110px;
+      background: radial-gradient(circle, #FDED71 30%, #F5C842 65%, transparent 100%);
+      border-radius: 50%;
+      animation: sunPulse 4s ease-in-out infinite;
+      opacity: 0.9;
+    }
+    @keyframes sunPulse {
+      0%,100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(245,200,66,0.3); }
+      50%      { transform: scale(1.07); box-shadow: 0 0 70px 20px rgba(245,200,66,0.5); }
+    }
+
+    /* Sailboat */
+    .sailboat {
+      position: absolute; bottom: 160px; right: 18%;
+      font-size: 2.5rem;
+      animation: sail 12s ease-in-out infinite;
+      opacity: 0.7;
+    }
+    @keyframes sail {
+      0%,100% { transform: translateX(0) rotate(-2deg); }
+      50%      { transform: translateX(-30px) rotate(2deg); }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .hero-title .accent { color: var(--coral); }
+    .hero-subtitle {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0.95;
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--coral);
+      color: var(--white);
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(232,96,58,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,96,58,0.55); }
+    .btn-ghost {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: var(--teal); }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollDown { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--coral);
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+      padding: 18px 40px;
+      overflow: hidden;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--white);
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .strip-item .icon { font-size: 1.1rem; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 96px 24px; }
+    .section-center { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--coral); font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    h2 em { color: var(--teal); font-style: normal; }
+    .lead { font-size: 1.05rem; color: #4a6a7a; line-height: 1.75; }
+
+    /* ── ABOUT ── */
+    .about-section { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-text h2 { margin-bottom: 20px; }
+    .about-text p { font-size: 1.02rem; color: #4a5e6e; line-height: 1.8; margin-bottom: 16px; }
+    .about-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .badge {
+      background: var(--cream);
+      border: 1.5px solid rgba(24,191,191,0.3);
+      color: var(--navy);
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 600;
+    }
+    .about-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-circle {
+      width: 320px; height: 320px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, #0a7f8f 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 20px 60px rgba(24,191,191,0.3);
+      font-size: 9rem;
+      animation: floatLogo 5s ease-in-out infinite;
+    }
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .logo-badge-tl, .logo-badge-br {
+      position: absolute;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 12px 18px;
+      box-shadow: 0 8px 24px rgba(13,59,94,0.12);
+      font-size: 0.82rem; font-weight: 600; color: var(--navy);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-badge-tl { top: 20px; left: -10px; }
+    .logo-badge-br { bottom: 20px; right: -10px; }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+
+    /* ── MENU ── */
+    .menu-section { background: var(--sand); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px; max-width: 1100px; margin: 0 auto;
+    }
+    .pizza-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(13,59,94,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .pizza-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(13,59,94,0.14);
+    }
+    .pizza-card-img {
+      width: 100%; height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .pizza-card-img.margherita { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+    .pizza-card-img.diavola    { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+    .pizza-card-img.quattro    { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+    .pizza-card-img.capricciosa{ background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+    .pizza-card-img.prosciutto { background: linear-gradient(135deg, #ffeaa7, #fdcb6e); }
+    .pizza-card-img.tartufo    { background: linear-gradient(135deg, #e0e0e0, #b0bec5); }
+    .pizza-card-body { padding: 24px; }
+    .pizza-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 4px;
+    }
+    .pizza-origin {
+      font-size: 0.72rem; color: var(--teal); font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .pizza-desc { font-size: 0.9rem; color: #6a7f90; line-height: 1.6; margin-bottom: 16px; }
+    .pizza-footer { display: flex; align-items: center; justify-content: space-between; }
+    .pizza-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900; color: var(--coral);
+    }
+    .pizza-tag {
+      background: var(--cream);
+      color: var(--teal); font-size: 0.75rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; letter-spacing: 1px;
+    }
+
+    /* ── DRINKS ── */
+    .drinks-section { background: var(--navy); }
+    .drinks-section h2 { color: var(--white); }
+    .drinks-section h2 em { color: var(--gold); }
+    .drinks-section .lead { color: rgba(255,255,255,0.65); }
+    .drinks-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; max-width: 900px; margin: 0 auto;
+    }
+    .drink-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .drink-card:hover { background: rgba(24,191,191,0.12); transform: translateY(-4px); }
+    .drink-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .drink-desc { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* ── VIBE ── */
+    .vibe-section { background: var(--white); }
+    .vibe-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; max-width: 1000px; margin: 0 auto;
+    }
+    .vibe-card {
+      border-radius: 20px;
+      aspect-ratio: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 28px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .vibe-card::before {
+      content: attr(data-emoji);
+      position: absolute; font-size: 7rem;
+      opacity: 0.15; bottom: -10px; right: -10px;
+    }
+    .vibe-card.v1 { background: linear-gradient(135deg, #18BFBF22, #18BFBF44); border: 2px solid #18BFBF55; }
+    .vibe-card.v2 { background: linear-gradient(135deg, #E8603A22, #E8603A44); border: 2px solid #E8603A55; }
+    .vibe-card.v3 { background: linear-gradient(135deg, #5A8C5A22, #5A8C5A44); border: 2px solid #5A8C5A55; }
+    .vibe-card.v4 { background: linear-gradient(135deg, #F5C84222, #F5C84244); border: 2px solid #F5C84255; }
+    .vibe-card.v5 { background: linear-gradient(135deg, #0D3B5E22, #0D3B5E44); border: 2px solid #0D3B5E55; }
+    .vibe-card.v6 { background: linear-gradient(135deg, #18BFBF22, #E8603A33); border: 2px solid #E8603A55; }
+    .vibe-card .vi { font-size: 2.4rem; margin-bottom: 10px; }
+    .vibe-card h3 { font-family:'Playfair Display',serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 6px; }
+    .vibe-card p { font-size: 0.82rem; color: #6a7f90; line-height: 1.5; }
+
+    /* ── LOCATION ── */
+    .location-section {
+      background: linear-gradient(135deg, var(--teal) 0%, #0a7f8f 100%);
+      text-align: center;
+    }
+    .location-section h2 { color: var(--white); }
+    .location-section h2 em { color: var(--gold); }
+    .location-section .lead { color: rgba(255,255,255,0.8); }
+    .location-cards {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center; max-width: 800px; margin: 0 auto 48px;
+    }
+    .loc-card {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 24px 28px;
+      text-align: left;
+      flex: 1; min-width: 220px;
+      backdrop-filter: blur(8px);
+    }
+    .loc-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .loc-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+    .loc-value { font-size: 1.05rem; font-weight: 600; color: var(--white); }
+    .map-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white);
+      color: var(--navy);
+      padding: 16px 36px; border-radius: 50px;
+      font-weight: 700; font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .map-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,0.22); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 48px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem; color: var(--teal);
+    }
+    .footer-logo span { color: var(--coral); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-copy { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { order: -1; }
+      .logo-circle { width: 240px; height: 240px; font-size: 7rem; }
+      .logo-badge-tl, .logo-badge-br { display: none; }
+      .drinks-grid { grid-template-columns: 1fr; }
+      .vibe-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .strip { gap: 20px; }
+    }
+
+    /* ── ENTRY ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Akali<span>fornia</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">Rólunk</a></li>
+    <li><a href="#menu">Pizzák</a></li>
+    <li><a href="#drinks">Italok</a></li>
+    <li><a href="#location" class="nav-cta">📍 Találj meg minket</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sun"></div>
+  <div class="sailboat">⛵</div>
+
+  <p class="hero-eyebrow">Balatonakali · Olasz pizza · Tradíció</p>
+  <h1 class="hero-title">
+    A Balaton<br>mellé kell<br><span class="accent">egy jó pizza.</span>
+  </h1>
+  <p class="hero-subtitle">Akalifornia Cafè & Pizzeria</p>
+  <p class="hero-desc">
+    Kőből rakott faszenes kemencénkből kerül ki minden pizza – 100%-ban olasz alapanyagokból, tradicionális recept szerint, a Balaton kristálytiszta vize mellett.
+  </p>
+  <div class="hero-btns">
+    <a href="#menu" class="btn-primary">🍕 Megnézem a pizzákat</a>
+    <a href="#location" class="btn-ghost">📍 Hogy jutok el?</a>
+  </div>
+
+  <div class="waves-bg">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="icon">🔥</span> Faszenes kemence</div>
+  <div class="strip-item"><span class="icon">🇮🇹</span> 100% olasz alapanyag</div>
+  <div class="strip-item"><span class="icon">🌊</span> Balaton partján</div>
+  <div class="strip-item"><span class="icon">☀️</span> Nyáron naponta nyitva</div>
+  <div class="strip-item"><span class="icon">🍷</span> Helyi borok</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <span class="eyebrow">A mi történetünk</span>
+      <h2>Receptünk <em>tradíció</em>, helyszínünk maga a paradicsom</h2>
+      <p>
+        Az Akalifornia Balatonakali strandjától néhány lépésre nyitotta meg kapuit, hogy a Balaton mellé az igazi olasz pizzaélményt hozza el. Faszenes kemencénkben sütjük pizzáinkat, ahogyan azt Nápolyban is teszik – semmi kompromisszum.
+      </p>
+      <p>
+        Két hatalmas teraszunkon relaxálhatsz, nézheted a vitorlásokat és élvezheted a Balaton egyedülálló panorámáját. Mellé egy jéghideg limonádé, egy csapolt sör, vagy a Gergely Borház válogatott borai közül valamelyik – ez az igazi nyár.
+      </p>
+      <div class="about-badges">
+        <span class="badge">🍕 Hely pizza</span>
+        <span class="badge">☕ Olasz kávé</span>
+        <span class="badge">🍷 Gergely Borház</span>
+        <span class="badge">🎣 Strand közelben</span>
+        <span class="badge">🌿 Friss alapanyagok</span>
+      </div>
+    </div>
+    <div class="about-visual fade-up">
+      <div class="logo-circle">🍕</div>
+      <div class="logo-badge-tl">
+        <div class="badge-dot"></div>
+        Nyitva 09:00 – éjfélig
+      </div>
+      <div class="logo-badge-br">
+        <div class="badge-dot" style="background:var(--coral)"></div>
+        +36 20 360 6490
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-center fade-up">
+    <span class="eyebrow">A Kemencéből</span>
+    <h2>Pizzáink – <em>mind kézzel készítve</em></h2>
+    <p class="lead">Csak friss, minőségi olasz alapanyagok. Vékony tészta, tele ízzel – ahogyan Nápolyban szokás.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img margherita">🍅</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Napoli • Klasszikus</div>
+        <div class="pizza-name">Margherita</div>
+        <p class="pizza-desc">Friss paradicsom szósz, buffalo mozzarella, bazsalikom. Az egyszerűség tökéletessége.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">2 490 Ft</span>
+          <span class="pizza-tag">🌿 Vegán-barát</span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img diavola">🌶️</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Kalábria • Tüzes</div>
+        <div class="pizza-name">Diavola</div>
+        <p class="pizza-desc">Pikáns szalámi, chilli, san marzano paradicsom, fior di latte. Nem az érzékenyeknek.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">2 890 Ft</span>
+          <span class="pizza-tag">🔥 Csípős</span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img quattro">🧀</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Italia • Sajtos</div>
+        <div class="pizza-name">Quattro Formaggi</div>
+        <p class="pizza-desc">Négy olasz sajt: mozzarella, gorgonzola, parmigiano, ricotta. Krémes, gazdag ízvilág.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">3 190 Ft</span>
+          <span class="pizza-tag">🧀 Sajt-lover</span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img capricciosa">🍄</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Napoli • Tradicionális</div>
+        <div class="pizza-name">Capricciosa</div>
+        <p class="pizza-desc">Sonka, gomba, articsóka, olajbogyó, mozzarella. A klasszikus olasz kert pizzán.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">3 090 Ft</span>
+          <span class="pizza-tag">🌸 Kedvenc</span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img prosciutto">🥓</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Parma • Prémium</div>
+        <div class="pizza-name">Prosciutto e Rucola</div>
+        <p class="pizza-desc">Pármai sonka, rucola, parmigiano, cseresznyeparadicsom – sütés után halmozva. Friss és elegáns.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">3 490 Ft</span>
+          <span class="pizza-tag">⭐ Prémium</span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza-card fade-up">
+      <div class="pizza-card-img tartufo">🖤</div>
+      <div class="pizza-card-body">
+        <div class="pizza-origin">Umbria • Különleges</div>
+        <div class="pizza-name">Tartufo Nero</div>
+        <p class="pizza-desc">Fekete szarvasgomba krém, mozzarella, fontina sajt, friss kakukkfű. A luxus pizzaélmény.</p>
+        <div class="pizza-footer">
+          <span class="pizza-price">3 890 Ft</span>
+          <span class="pizza-tag">🖤 Séf ajánlat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section class="drinks-section" id="drinks">
+  <div class="section-center fade-up">
+    <span class="eyebrow" style="color:var(--gold)">Italajánlatunk</span>
+    <h2>Igyál olyat, ami <em>illik a nyárhoz</em></h2>
+    <p class="lead">Olasz kávétól a helyi borokon át a friss limonádéig – minden pillanathoz van italunk.</p>
+  </div>
+  <div class="drinks-grid">
+    <div class="drink-card fade-up">
+      <div class="drink-icon">☕</div>
+      <div class="drink-name">Olasz Kávék</div>
+      <p class="drink-desc">Autentikus espresso, cappuccino, macchiato – igazi olasz pörkölésből.</p>
+    </div>
+    <div class="drink-card fade-up">
+      <div class="drink-icon">🍋</div>
+      <div class="drink-name">Friss Limonádék</div>
+      <p class="drink-desc">Házikészítésű limonádé, eper, menta, gránátalma – szomjat olt a tikkasztó nyárban.</p>
+    </div>
+    <div class="drink-card fade-up">
+      <div class="drink-icon">🍺</div>
+      <div class="drink-name">Csapolt Sörök</div>
+      <p class="drink-desc">Jéghideg csapolt sör a strandolás utáni felüdüléshez. Ahogy kell.</p>
+    </div>
+    <div class="drink-card fade-up">
+      <div class="drink-icon">🍷</div>
+      <div class="drink-name">Gergely Borház</div>
+      <p class="drink-desc">Balatoncsicsói Gergely Borház válogatott borai – helyi, minőségi, különleges.</p>
+    </div>
+    <div class="drink-card fade-up">
+      <div class="drink-icon">🥃</div>
+      <div class="drink-name">Zimek Pálinka</div>
+      <p class="drink-desc">A Zimek pálinkamanufaktúra prémium kézműves pálinkái – a magyarok rövid itala.</p>
+    </div>
+    <div class="drink-card fade-up">
+      <div class="drink-icon">🧃</div>
+      <div class="drink-name">Üdítők & Tea</div>
+      <p class="drink-desc">Hideg és meleg italok gyerekektől felnőttekig – mindenki megtalálja a kedvencét.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section class="vibe-section">
+  <div class="section-center fade-up">
+    <span class="eyebrow">Miért jönnek vissza?</span>
+    <h2>A <em>hangulat</em> legalább annyit számít, mint az étel</h2>
+  </div>
+  <div class="vibe-grid">
+    <div class="vibe-card v1 fade-up" data-emoji="🌊">
+      <div class="vi">🌊</div>
+      <h3>Balaton-parti terasz</h3>
+      <p>Két hatalmas teraszon nézheted a tavat és a vitorlásokat ebéd vagy vacsora közben.</p>
+    </div>
+    <div class="vibe-card v2 fade-up" data-emoji="🔥">
+      <div class="vi">🔥</div>
+      <h3>Faszenes kemence</h3>
+      <p>Minden pizza frissen sül a kőkemencénkben – a füst illata és a ropogós szélek varázsa.</p>
+    </div>
+    <div class="vibe-card v3 fade-up" data-emoji="☀️">
+      <div class="vi">☀️</div>
+      <h3>Nyári hangulat</h3>
+      <p>Lazán, nyárian – ez az Akalifornia lényege. Gyertek fürdőruhában is!</p>
+    </div>
+    <div class="vibe-card v4 fade-up" data-emoji="👨‍👩‍👧">
+      <div class="vi">👨‍👩‍👧</div>
+      <h3>Gyerekbarát</h3>
+      <p>Gyermek horgászversenyeket is szervezzük – a legkisebbek is otthon érzik magukat.</p>
+    </div>
+    <div class="vibe-card v5 fade-up" data-emoji="🏃">
+      <div class="vi">🏃</div>
+      <h3>Elvitelre is</h3>
+      <p>Sietős napokra elviteles pizzát is kérhetnek – ugyanolyan frissen, ugyanolyan szeretettel.</p>
+    </div>
+    <div class="vibe-card v6 fade-up" data-emoji="🇮🇹">
+      <div class="vi">🇮🇹</div>
+      <h3>Igazi olasz recept</h3>
+      <p>Nem kompromisszum, nem közelítés – tradicionális olasz receptek, autentikus alapanyagok.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="section-center fade-up">
+    <span class="eyebrow" style="color:rgba(255,255,255,0.6)">Megtalálsz minket</span>
+    <h2>Gyere el a <em>Balaton</em> mellé!</h2>
+    <p class="lead">Közvetlenül Balatonakali strandjánál várunk téged és a barátaidat.</p>
+  </div>
+  <div class="location-cards fade-up">
+    <div class="loc-card">
+      <span class="loc-icon">📍</span>
+      <div class="loc-label">Cím</div>
+      <div class="loc-value">Balaton u. 1, 8243 Balatonakali</div>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">🕐</span>
+      <div class="loc-label">Nyitva</div>
+      <div class="loc-value">09:00 – éjfélig (nyáron naponta)</div>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">📞</span>
+      <div class="loc-label">Telefon</div>
+      <div class="loc-value">+36 20 360 6490</div>
+    </div>
+  </div>
+  <a href="https://www.google.com/maps/place/Akalifornia+Caf%C3%A8+%26+Pizzeria/@46.8808265,17.7538509,17z" target="_blank" class="map-btn fade-up">
+    🗺️ Megnyitom Google Maps-en
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Akali<span>fornia</span></div>
+  <div class="footer-links">
+    <a href="#about">Rólunk</a>
+    <a href="#menu">Menü</a>
+    <a href="#drinks">Italok</a>
+    <a href="#location">Helyszín</a>
+    <a href="https://www.facebook.com/akaliforniacafe/" target="_blank">Facebook</a>
+  </div>
+  <p class="footer-copy">© 2025 Akalifornia Cafè & Pizzeria · Balatonakali</p>
+</footer>
+
+<script>
+  // Intersection observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger cards within grids
+  document.querySelectorAll('.menu-grid .pizza-card, .drinks-grid .drink-card, .vibe-grid .vibe-card').forEach((card, i) => {
+    card.style.transitionDelay = (i % 3) * 0.1 + 's';
+  });
+</script>
+</body>
+</html>
